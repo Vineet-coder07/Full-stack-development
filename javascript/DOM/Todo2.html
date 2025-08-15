@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom manipulation 2nd way</title>
+</head>
+<body>
+    <input type="text" placeholder="Enter your task">
+    <button onclick="AddTodo()">Addtodo</button>
+</body>
+<script>
+    function AddTodo(){
+        const value=document.querySelector("input").value;
+        const spanel=document.createElement("span");
+        const buttonel=document.createElement("button");
+        spanel.innerHTML=value;
+        buttonel.innerHTML="Delete";
+        const divel=document.createElement("div");
+        divel.appendChild(spanel);
+        divel.appendChild(buttonel);
+        document.querySelector("body").appendChild(divel);
+    }
+</script>
+</html>

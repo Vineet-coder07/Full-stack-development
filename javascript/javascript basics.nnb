@@ -1,0 +1,208 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                " Function In js :\r\n assignment  1 : Write a function sum that finds the sum of two numbers. \r\n Side quest - Try passing in a string instead of a number and see what happens?"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function sum(a,b){\r\n    return a+b;\r\n}\r\nconsole.log(sum(5,6));\r\nconsole.log(sum(\"Vineet\",\"Rajpal\"));"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Conditionals in javascript:\r\n assignment 1 : Write a function called canVote that returns true or false if the age of a user is > 18 ?"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function canVote(age){\r\n    if(age>=18)\r\n        return true;\r\n    else \r\n        return false;\r\n}\r\nconsole.log(canVote(18));\r\nconsole.log(canVote(10));"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "LOOPS in javascript :\r\nAssignment 1: Write a function called sum that finds the sum from 1 to a number"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function sum(n){\r\n    let t=0;\r\n    for(let i=1;i<=n;i++){\r\n        t=t+i;\r\n    }\r\n    return t;\r\n}\r\nsum(15);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Objects in javascript : \r\nassignment 1: Write a function that takes a user as an input and greets them with their name and age ?"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function greet(user){\r\n    console.log(\"Hi ,\" +user.name + \" your age is \" + user.age+\".\");\r\n}\r\nlet user={\r\n    name: \"Vineet\",\r\n    age:20\r\n\r\n}\r\ngreet(user);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "assignment 2 : Write a function that takes a new object as input which has name , age  and gender and greets the user with their gender (Hi Mr/Mrs/Others harkirat, your age is 21) ?"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function greet(user){\r\n    if(user.gender==\"male\"){\r\n        console.log(\"Hi Mr \"+user.name +\", \" + \"your age is \"+user.age);\r\n    }\r\n    else if(user.gender==\"female\"){\r\n         console.log(\"Hi Mrs \"+user.name +\", \"+ \"your age is \"+user.age);\r\n    }\r\n    else{\r\n        console.log(\"Hi Others \"+ user.name +\", \" +\"your age is \"+user.age);\r\n    }\r\n    if(user.age>=18){\r\n        console.log(\"you are eligible to vote . \");\r\n    }\r\n    \r\n}\r\nlet user={\r\n    name:\"Virat\", \r\n    age:21, \r\n    gender:\"male\"\r\n}\r\ngreet(user);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Arrays in javascript\r\nAssignment 1 : Write a function that takes an array of numbers as input, and returns a new array with only even values. Read about filter in JS"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function even(arr){\r\n    const users=[];\r\n    for(let i=0;i<arr.length;i++){\r\n        if(arr[i]%2 === 0){\r\n            users.push(arr[i]);\r\n        }\r\n    }\r\n    return users;\r\n}\r\nconsole.log(even([1,2,3,4,5,6]));"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Same ques using filter method in js"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function even(arr){\r\n    return arr.filter(i => i % 2 == 0 );\r\n}\r\nconsole.log(even([1,2,3,4,5,6,8,11]));"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Array of objects in javascript : \r\nAssignment 1: Write a function that takes an array of users as inputs and returns only the users who are more than 18 years old and are male?"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function vote(arr){\r\n    return arr.filter(i => i.age>=18);\r\n}\r\nusers=[{\r\n    name : 'raj',\r\n    age :20,\r\n    gender:'male'\r\n},{\r\n    name:'raman',\r\n    age:17,\r\n    gender:'male'\r\n},{\r\n    name:'roy',\r\n    age:22,\r\n    gender:'male'\r\n},{\r\n    name:'shruti',\r\n    age:19,\r\n    gender:'female'\r\n}];\r\nconsole.log(vote(users));"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "[",
+                                "  { name: 'raj', age: 20, gender: 'male' },",
+                                "  { name: 'roy', age: 22, gender: 'male' },",
+                                "  { name: 'shruti', age: 19, gender: 'female' }",
+                                "]",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Obejects of objects in js :"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "user={\r\n    name:'Rohan',\r\n    age:18,\r\n    city :{\r\n        city1 :'mumbai',\r\n        city2 : 'bangalore',\r\n        city3 : 'chennai',\r\n    }\r\n}\r\nconsole.log(user);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "{",
+                                "  name: 'Rohan',",
+                                "  age: 18,",
+                                "  city: { city1: 'mumbai', city2: 'bangalore', city3: 'chennai' }",
+                                "}",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "assignment 1 : Create a function that takes an array of objects as input,\r\nand returns the users whose age > 18 and are male ? "
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function check(vote){\r\n    return vote.filter(i => i.age >= 18 && i.gender == 'male');\r\n}\r\nusers=[{\r\n    name : 'raj',\r\n    age :20,\r\n    gender:'male'\r\n},{\r\n    name:'raman',\r\n    age:17,\r\n    gender:'male'\r\n},{\r\n    name:'roy',\r\n    age:22,\r\n    gender:'male'\r\n},{\r\n    name:'shruti',\r\n    age:19,\r\n    gender:'female'\r\n}];\r\nconsole.log(check(users));"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "[",
+                                "  { name: 'raj', age: 20, gender: 'male' },",
+                                "  { name: 'roy', age: 22, gender: 'male' }",
+                                "]",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        }
+    ]
+}

@@ -1,0 +1,74 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "fUNCTION IN JS to add two numbers"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function sum( a, b){\r\n    return parseInt(a)+parseInt(b);\r\n}\r\nsum('2',5);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "function to sum numbers upto n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function sum(n){\r\n    let ans=0;\r\n    for(let i=1;i<=n;i++){\r\n        ans=ans+i;\r\n    }\r\n    return ans;\r\n}\r\nconsole.log(sum(10));\r\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Reading a file in js:"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const fs=require('fs');\r\n// utf-8 is used to present output it becomes reaadible\r\nconst contents=fs.readFileSync(\"a.txt\",\"utf-8\");\r\nconsole.log(contents);"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Write the code to read the other file synchronously"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const fs=require('fs');\r\nconst contents=fs.readFile(\"a.txt\",\"utf-8\"); // synchronous\r\nconsole.log(contents);\r\nconst contents2 =fs.readFileSync(\"b.txt\",\"utf-8\"); // asynchronous\r\nconsole.log(contents2);\r\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "Asynchronous JS"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "function check(err,data){\r\n    if(err){\r\n        console.log(\"Error\");\r\n    }\r\n    console.log(data);\r\n}\r\nfs.readFile(\"a.txt\",\"utf-8\",check); // it does not wait to execute these lines of code \r\nfs.readFile(\"b.txt\",\"utf-8\",check); // this makes js \r\nconsole.log(\"Done!\")"
+            ],
+            "outputs": []
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+h1,h3{
+    color: red;
+}
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
+#login,#signup{
+    background-color: red;
+    color: white;
+}
+#myid{
+    color: green;
+}
