@@ -1,0 +1,137 @@
+[4mNPM-CONFIG[24m(1)                                                                                                                                              [4mNPM-CONFIG[24m(1)
+
+[1mNAME[0m
+       [1mnpm-config [22m- Manage the npm configuration files
+
+   [1mSynopsis[0m
+         npm config set <key>=<value> [<key>=<value> ...]
+         npm config get [<key> [<key> ...]]
+         npm config delete <key> [<key> ...]
+         npm config list [--json]
+         npm config edit
+         npm config fix
+
+         alias: c
+
+       Note: This command is unaware of workspaces.
+
+   [1mDescription[0m
+       npm gets its config settings from the command line, environment variables, [1mnpmrc [22mfiles, and in some cases, the [1mpackage.json [22mfile.
+
+       See npm help npmrc for more information about the npmrc files.
+
+       See npm help config for a more thorough explanation of the mechanisms involved, and a full list of config options available.
+
+       The [1mnpm config [22mcommand can be used to update and edit the contents of the user and global npmrc files.
+
+   [1mSub-commands[0m
+       Config supports the following sub-commands:
+
+   [1mset[0m
+         npm config set key=value [key=value...]
+         npm set key=value [key=value...]
+
+       Sets each of the config keys to the value provided. Modifies the user configuration file unless [1mlocation [4m[22m⟨/commands/npm-config#location⟩[24m is passed.
+
+       If value is omitted, the key will be removed from your config file entirely.
+
+       Note: for backwards compatibility, [1mnpm config set key value [22mis supported as an alias for [1mnpm config set key=value[22m.
+
+   [1mget[0m
+         npm config get [key ...]
+         npm get [key ...]
+
+       Echo the config value(s) to stdout.
+
+       If multiple keys are provided, then the values will be prefixed with the key names.
+
+       If no keys are provided, then this command behaves the same as [1mnpm config list[22m.
+
+   [1mlist[0m
+         npm config list
+
+       Show all the config settings. Use [1m-l [22mto also show defaults. Use [1m--json [22mto show the settings in json format.
+
+   [1mdelete[0m
+         npm config delete key [key ...]
+
+       Deletes the specified keys from all configuration files.
+
+   [1medit[0m
+         npm config edit
+
+       Opens the config file in an editor. Use the [1m--global [22mflag to edit the global config.
+
+   [1mfix[0m
+         npm config fix
+
+       Attempts to repair invalid configuration items. Usually this means attaching authentication config (i.e. [1m_auth[22m, [1m_authToken[22m) to the configured [1mregistry[22m.
+
+   [1mConfiguration[0m
+   [1mjson[0m
+       •   Default: false
+
+       •   Type: Boolean
+
+       Whether or not to output JSON data, rather than the normal output.
+
+       •   In [1mnpm pkg set [22mit enables parsing set values with JSON.parse() before saving them to your [1mpackage.json[22m.
+
+       Not supported by all npm commands.
+
+   [1mglobal[0m
+       •   Default: false
+
+       •   Type: Boolean
+
+       Operates  in  "global" mode, so that packages are installed into the [1mprefix [22mfolder instead of the current working directory. See npm help folders for more on the
+       differences in behavior.
+
+       •   packages are installed into the [1m{prefix}/lib/node_modules [22mfolder, instead of the current working directory.
+
+       •   bin files are linked to [1m{prefix}/bin[0m
+
+       •   man pages are linked to [1m{prefix}/share/man[0m
+
+   [1meditor[0m
+       •   Default: The EDITOR or VISUAL environment variables, or '%SYSTEMROOT%\notepad.exe' on Windows, or 'vi' on Unix systems
+
+       •   Type: String
+
+       The command to run for [1mnpm edit [22mand [1mnpm config edit[22m.
+
+   [1mlocation[0m
+       •   Default: "user" unless [1m--global [22mis passed, which will also set this value to "global"
+
+       •   Type: "global", "user", or "project"
+
+       When passed to [1mnpm config [22mthis refers to which config file to use.
+
+       When set to "global" mode, packages are installed into the [1mprefix [22mfolder instead of the current working directory. See npm help folders for more on  the  differ‐
+       ences in behavior.
+
+       •   packages are installed into the [1m{prefix}/lib/node_modules [22mfolder, instead of the current working directory.
+
+       •   bin files are linked to [1m{prefix}/bin[0m
+
+       •   man pages are linked to [1m{prefix}/share/man[0m
+
+   [1mlong[0m
+       •   Default: false
+
+       •   Type: Boolean
+
+       Show extended information in [1mls[22m, [1msearch[22m, and [1mhelp-search[22m.
+
+   [1mSee Also[0m
+       •   npm help folders
+
+       •   npm help config
+
+       •   [1mpackage.json [4m[22m⟨/configuring-npm/package-json⟩[0m
+
+       •   npm help npmrc
+
+       •   npm help npm
+
+NPM@10.9.2                                                                    December 2024                                                                [4mNPM-CONFIG[24m(1)
