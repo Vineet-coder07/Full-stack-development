@@ -3,72 +3,80 @@
         {
             "language": "markdown",
             "source": [
-                "fUNCTION IN JS to add two numbers"
-            ],
-            "outputs": []
-        },
-        {
-            "language": "typescript",
-            "source": [
-                "function sum( a, b){\r\n    return parseInt(a)+parseInt(b);\r\n}\r\nsum('2',5);"
+                "synchronous function executes line and line . While Asynchronous function runs while futher function don\"t stop. "
             ],
             "outputs": []
         },
         {
             "language": "markdown",
             "source": [
-                "function to sum numbers upto n"
+                "Example of Synchronous function"
             ],
             "outputs": []
         },
         {
             "language": "typescript",
             "source": [
-                "function sum(n){\r\n    let ans=0;\r\n    for(let i=1;i<=n;i++){\r\n        ans=ans+i;\r\n    }\r\n    return ans;\r\n}\r\nconsole.log(sum(10));\r\n"
+                "function findsum(n){\r\n    let ans =0;\r\n    for (let i=0;i<=n;i++){\r\n        ans += i;\r\n    }\r\n    return ans;\r\n}\r\nfunction findsumtill1100() {\r\n    console.log(findsum(100));\r\n}\r\n// async function (settimeout)\r\nsetTimeout(findsumtill1100,2000);\r\nconsole.log(\"hello world\");"
             ],
             "outputs": []
         },
         {
             "language": "markdown",
             "source": [
-                "Reading a file in js:"
+                "Async function to read a file from filesystem"
             ],
             "outputs": []
         },
         {
             "language": "typescript",
             "source": [
-                "const fs=require('fs');\r\n// utf-8 is used to present output it becomes reaadible\r\nconst contents=fs.readFileSync(\"a.txt\",\"utf-8\");\r\nconsole.log(contents);"
+                "// fs.readFile is also async function\r\nconst fs = require(\"fs\");\r\n\r\nsetTimeout(() => {\r\n    fs.readFile(\"a.txt\", \"utf-8\", function (err, data) {\r\n        if (err) {\r\n            console.error(\"Error reading file:\", err);\r\n            return;\r\n        }\r\n        console.log(data);\r\n    });\r\n}, 3000);\r\n\r\nconsole.log(\"Hello world\");\r\n"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Hello world",
+                                "",
+                                "Hello folks get ready to build something big\r",
+                                "this journey is going too big",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "language": "markdown",
             "source": [
-                "Write the code to read the other file synchronously"
+                " Promoises in js are synatical sugar . Writing our own async function"
             ],
             "outputs": []
         },
         {
             "language": "typescript",
             "source": [
-                "const fs=require('fs');\r\nconst contents=fs.readFile(\"a.txt\",\"utf-8\"); // synchronous\r\nconsole.log(contents);\r\nconst contents2 =fs.readFileSync(\"b.txt\",\"utf-8\"); // asynchronous\r\nconsole.log(contents2);\r\n"
+                "const fs=require('fs');\r\nfunction kiratReadfile(){\r\n    return new Promise(function(resovle){\r\n        fs.readFile(\"a.txt\",\"utf-8\",function(err,data){\r\n            resovle(data);\r\n        });\r\n    })\r\n}\r\nfunction onDone(data){\r\n    console.log(data)\r\n}\r\nkiratReadfile().then(onDone);"
             ],
-            "outputs": []
-        },
-        {
-            "language": "markdown",
-            "source": [
-                "Asynchronous JS"
-            ],
-            "outputs": []
-        },
-        {
-            "language": "typescript",
-            "source": [
-                "function check(err,data){\r\n    if(err){\r\n        console.log(\"Error\");\r\n    }\r\n    console.log(data);\r\n}\r\nfs.readFile(\"a.txt\",\"utf-8\",check); // it does not wait to execute these lines of code \r\nfs.readFile(\"b.txt\",\"utf-8\",check); // this makes js \r\nconsole.log(\"Done!\")"
-            ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Hello folks get ready to build something big\r",
+                                "this journey is going too big",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
