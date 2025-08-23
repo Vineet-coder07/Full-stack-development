@@ -19,7 +19,21 @@
             "source": [
                 "function findsum(n){\r\n    let ans =0;\r\n    for (let i=0;i<=n;i++){\r\n        ans += i;\r\n    }\r\n    return ans;\r\n}\r\nfunction findsumtill1100() {\r\n    console.log(findsum(100));\r\n}\r\n// async function (settimeout)\r\nsetTimeout(findsumtill1100,2000);\r\nconsole.log(\"hello world\");"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "hello world",
+                                "",
+                                "5050",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "language": "markdown",
@@ -41,8 +55,7 @@
                             "value": [
                                 "Hello world",
                                 "",
-                                "Hello folks get ready to build something big\r",
-                                "this journey is going too big",
+                                "Hello from a.txt",
                                 ""
                             ]
                         }
