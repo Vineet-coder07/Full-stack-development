@@ -68,8 +68,7 @@
                         {
                             "mime": "application/vnd.code.notebook.stdout",
                             "value": [
-                                "Hello folks get ready to build something big\r",
-                                "this journey is going too big",
+                                "Hello from a.txt",
                                 "",
                                 ""
                             ]
