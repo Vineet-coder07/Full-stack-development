@@ -1,8 +1,12 @@
 const express=require("express");
 const app=express();
-
-app.get("/",function(req,res){
-    res.send("Hello World");
+app.use(express.json());
+const port=process.env.GET || 3000;
+app.get("/conversations",function(req,res){
+    console.log(req.body);
+    res.send({
+        msg : "2 + 2 = 5"
+    });
 });
 
 
