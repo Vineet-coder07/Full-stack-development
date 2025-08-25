@@ -5,7 +5,7 @@ const port=process.env.GET || 3000;
 app.get("/conversations",function(req,res){
     console.log(req.body);
     res.send({
-        msg : "2 + 2 = 5"
+        msg : "2 - 2 = 5"
     });
 });
 
