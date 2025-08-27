@@ -40,7 +40,7 @@ app.post("/",function(req,res){
 
 //Put - replace the added kidney
 app.put("/",function(req,res){
-    for(let i=0;i<user[0].kidneys;i++){
+    for(let i=0;i<user[0].kidneys.length;i++){
         user[0].kidneys[i].healthy=true;
     }
     res.json({
@@ -50,7 +50,7 @@ app.put("/",function(req,res){
 
 app.delete("/",function(req,res){
     const newkidneys=[];
-    for(let i=0;i<user[0].kidneys;i++){
+    for(let i=0;i<user[0].kidneys.length;i++){
         if(user[0].kidneys[i].healthy){
             newkidneys.push({
                 healthy:true
