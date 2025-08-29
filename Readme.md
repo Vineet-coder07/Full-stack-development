@@ -1,1 +1,1 @@
-# This stuff contains what I have learned til now in mern stack
+# This stuff contains what I have learned till now in mern stack
