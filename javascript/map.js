@@ -17,5 +17,5 @@ const input=[1,2,3,4,5];
 //filtering
 const arr=[1,2,3,4,5];
 for(let i=0;i<arr.size();i++){
-    new
+    
 }
