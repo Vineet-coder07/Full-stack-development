@@ -6,5 +6,3 @@ function validate(n){
         password:zod.string().min(8)
     })
 }
-
-const res 
