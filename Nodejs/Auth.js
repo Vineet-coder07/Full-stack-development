@@ -2,6 +2,7 @@ const express=require('express')
 const jwt=require('jsonwebtoken')
 const jwtPassword="123456";
 const app=express();
+app.use(express.json());
 const ALL_USERS=[
     {
         username:"raman123@gmail.com",
@@ -20,7 +21,7 @@ const ALL_USERS=[
     },
 ];
 function userExists(username,password){
-    const userExists=false;
+    let userExists=false;
     for(let i=0;i<ALL_USERS.length;i++){
         if(ALL_USERS[i].username == username && ALL_USERS[i].password == password){
             userExists=true;
@@ -44,3 +45,5 @@ app.post("/signin",function(req,res){
         token,
     })
 })
+
+app.listen(3000);
