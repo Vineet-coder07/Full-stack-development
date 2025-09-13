@@ -1,6 +1,10 @@
 const express=require('express')
 const jwt=require('jsonwebtoken')
 const jwtPassword="123456";
+const mongoose=require('mongoose');
+mongoose.connect(
+  "mongodb+srv://user_app:vineet23@cluster0.sbrxiiy.mongodb.net/",
+);
 const app=express();
 app.use(express.json());
 const ALL_USERS=[

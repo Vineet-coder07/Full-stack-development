@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RailMate - Your Railway Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Basic Setup & Variables */
+    :root {
+        --primary-blue: #0d6efd;
+        --primary-gradient-start: #007bff;
+        --primary-gradient-end: #0056b3;
+        --light-blue: #e7f0ff;
+        --dark-blue: #004085;
+        --text-color: #212529;
+        --muted-text: #6c757d;
+        --bg-color: #f0f2f5;
+        --card-bg: #ffffff;
+        --border-color: #e0e4e8;
+        --card-shadow-light: 0 6px 20px rgba(0, 0, 0, 0.08);
+        --card-shadow-heavy: 0 12px 40px rgba(0, 0, 0, 0.15);
+        --border-radius-sm: 8px;
+        --border-radius-lg: 12px;
+        --success-color: #198754;
+        --warning-color: #fd7e14;
+        --error-color: #dc3545;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Header & Navigation */
+    header {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        backdrop-filter: blur(8px);
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .brand-logo {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--primary-blue);
+        text-decoration: none;
+        letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.8rem;
+    }
+
+    .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 0;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary-blue);
+    }
+
+    .btn-login {
+        background: var(--primary-blue);
+        color: #fff !important;
+        padding: 0.6rem 1.2rem;
+        border-radius: var(--border-radius-sm);
+        font-weight: 700;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+        margin-left: 1rem;
+    }
+
+    .btn-login:hover {
+        background: var(--dark-blue);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 86, 179, 0.35);
+    }
+
+    /* Hero Section */
+    .hero-section {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        padding: 8rem 0 5rem 0;
+        min-height: 100vh;
+    }
+
+    .hero-content {
+        flex: 1.2;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-image {
+        flex: 0.8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 20px;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--card-shadow-light);
+        transition: transform 0.3s ease-out;
+        animation: float 6s ease-in-out infinite;
+        object-fit: cover;
+        height: 350px;
+        width: 100%;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .hero-image:hover img {
+        transform: scale(1.02);
+    }
+
+    /* Service Card & Tabs */
+    .service-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--card-shadow-heavy);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.95);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .tabs {
+        display: flex;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0.5rem 1rem;
+    }
+
+    .tab-link {
+        flex: 1;
+        padding: 1rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--muted-text);
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+        border-radius: var(--border-radius-sm);
+        margin: 0 0.25rem;
+    }
+
+    .tab-link:hover:not(.active) {
+        background-color: var(--light-blue);
+        color: var(--primary-blue);
+    }
+
+    .tab-link.active {
+        color: var(--primary-blue);
+        border-bottom-color: var(--primary-blue);
+        background-color: var(--card-bg);
+        box-shadow: var(--card-shadow-light);
+    }
+
+    .tab-content {
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        display: none;
+    }
+
+    .tab-content h2 {
+        margin-bottom: 0.75rem;
+        color: var(--text-color);
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    .tab-content p {
+        margin-bottom: 2rem;
+        color: var(--muted-text);
+        font-size: 1.05rem;
+    }
+
+    /* Form Styling */
+    .service-form .form-row {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .service-form .form-group {
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .service-form label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+        color: var(--text-color);
+    }
+
+    .service-form input[type="text"],
+    .service-form input[type="number"],
+    .service-form input[type="date"],
+    .service-form select {
+        width: 100%;
+        padding: 1rem 1.2rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        font-size: 1.05rem;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+        font-family: inherit;
+    }
+
+    .service-form select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1.2em;
+        padding-right: 3rem;
+    }
+
+    .service-form input:focus,
+    .service-form select:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 4px var(--light-blue);
+        background-color: var(--card-bg);
+    }
+
+    /* Error state for form fields */
+    .form-group.error input,
+    .form-group.error select {
+        border-color: var(--error-color);
+    }
+
+    .error-message {
+        color: var(--error-color);
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: none;
+    }
+
+    .form-group.error .error-message {
+        display: block;
+    }
+
+    /* Loading state for select */
+    .select-loading {
+        position: relative;
+    }
+
+    .select-loading::after {
+        content: "";
+        position: absolute;
+        right: 2.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--primary-blue);
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+        to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+        border: none;
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        background: linear-gradient(135deg, var(--primary-gradient-end), var(--primary-gradient-start));
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    /* Section Styles */
+    .section {
+        padding: 5rem 0;
+        position: relative;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--muted-text);
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* About Section */
+    .about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .about-card {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--card-shadow-light);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .about-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .about-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .about-card h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+    }
+
+    .about-card p {
+        color: var(--muted-text);
+        line-height: 1.6;
+    }
+
+    /* Features Section */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .feature-card {
+        background: var(--card-bg);
+        padding: 2.5rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--card-shadow-light);
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--card-shadow-heavy);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        display: block;
+    }
+
+    .feature-card h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+        color: var(--muted-text);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .feature-list li {
+        color: var(--muted-text);
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+        position: relative;
+    }
+
+    .feature-list li:before {
+        content: "✓";
+        color: var(--success-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+
+    /* Services Section */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .service-item {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--card-shadow-light);
+        text-align: center;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+    }
+
+    .service-item:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--card-shadow-heavy);
+    }
+
+    .service-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+    }
+
+    .service-item h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+    }
+
+    .service-item p {
+        color: var(--muted-text);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .service-btn {
+        padding: 0.7rem 1.5rem;
+        background: var(--primary-blue);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .service-btn:hover {
+        background: var(--dark-blue);
+        transform: translateY(-1px);
+    }
+
+    /* Support Section */
+    .support-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-top: 3rem;
+        align-items: start;
+    }
+
+    .support-info {
+        background: var(--card-bg);
+        padding: 2.5rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--card-shadow-light);
+        border: 1px solid var(--border-color);
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: var(--bg-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .contact-icon {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+        width: 40px;
+        text-align: center;
+    }
+
+    .contact-details h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.2rem;
+    }
+
+    .contact-details p {
+        color: var(--muted-text);
+        margin: 0;
+    }
+
+    .support-form {
+        background: var(--card-bg);
+        padding: 2.5rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--card-shadow-light);
+        border: 1px solid var(--border-color);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.9rem 1.1rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-sm);
+        font-size: 1rem;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px var(--light-blue);
+        background-color: var(--card-bg);
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 2.5rem 0;
+        margin-top: 4rem;
+        border-top: 1px solid var(--border-color);
+        background-color: var(--card-bg);
+        color: var(--muted-text);
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+    }
+
+    footer p {
+        font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in-up {
+        animation: fadeInUp 0.5s ease-out forwards;
+    }
+
+    .scroll-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .scroll-reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Alert/Notification Styles */
+    .alert {
+        padding: 1rem 1.5rem;
+        border-radius: var(--border-radius-sm);
+        margin-bottom: 1rem;
+        display: none;
+    }
+
+    .alert.show {
+        display: block;
+        animation: fadeInUp 0.3s ease;
+    }
+
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .hero-section {
+            flex-direction: column;
+            padding: 6rem 0 3rem 0;
+            min-height: auto;
+        }
+        
+        .hero-image {
+            margin-top: 2.5rem;
+            max-width: 600px;
+        }
+        
+        .hero-image img {
+            height: auto;
+        }
+        
+        .support-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+        }
+        
+        .service-form .form-row {
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tabs {
+            flex-direction: column;
+            padding: 0;
+        }
+        
+        .tab-link {
+            border-bottom: 1px solid var(--border-color);
+            margin: 0;
+            border-radius: 0;
+        }
+        
+        .tab-content {
+            padding: 1.5rem;
+        }
+        
+        .tab-content h2 {
+            font-size: 1.5rem;
+        }
+        
+        .about-grid,
+        .features-grid,
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+        }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="#" class="brand-logo">RailMate 🚆</a>
+      <div class="nav-links">
+        <a href="#about">About Us</a>
+        <a href="#features">Features</a>
+        <a href="#services">Services</a>
+        <a href="#support">Support</a>
+        <a href="#login" class="btn-login">Login / Register</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section container">
+      <div class="hero-content scroll-reveal">
+        <div class="service-card">
+          <div class="tabs">
+            <button class="tab-link active" onclick="openService(event, 'parcel-booking')">📦 Book Parcel</button>
+            <button class="tab-link" onclick="openService(event, 'parcel-tracking')">📍 Track Parcel</button>
+            <button class="tab-link" onclick="openService(event, 'food-ordering')">🍔 Pre-order Food</button>
+          </div>
+
+          <div id="parcel-booking" class="tab-content" style="display: block;">
+            <h2>Book Your Parcel Online</h2>
+            <p>Send your packages across the country hassle-free.</p>
+            
+            <div id="parcel-alert" class="alert alert-error">
+              Please select different stations for From and To locations.
+            </div>
+            
+            <form class="service-form" id="parcel-booking-form">
+              <div class="form-row">
+                <div class="form-group" id="from-station-group">
+                  <label for="from-station">From Station</label>
+                  <select id="from-station" required>
+                    <option value="">Select departure station</option>
+                  </select>
+                  <span class="error-message">Please select a departure station</span>
+                </div>
+                <div class="form-group" id="to-station-group">
+                  <label for="to-station">To Station</label>
+                  <select id="to-station" required>
+                    <option value="">Select destination station</option>
+                  </select>
+                  <span class="error-message">Please select a destination station</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="parcel-type">Parcel Content</label>
+                <input type="text" id="parcel-type" placeholder="e.g., Documents, Electronics, Textiles" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="parcel-weight">Weight (kg)</label>
+                  <input type="number" id="parcel-weight" placeholder="e.g., 5" min="0.1" step="0.1" required>
+                </div>
+                <div class="form-group">
+                  <label for="parcel-date">Dispatch Date</label>
+                  <input type="date" id="parcel-date" required>
+                </div>
+              </div>
+              <button type="submit" class="btn-primary" id="parcel-submit-btn">Calculate Fare & Book</button>
+            </form>
+          </div>
+
+          <div id="parcel-tracking" class="tab-content">
+            <h2>Track Your Parcel in Real-Time</h2>
+            <p>Enter your Parcel Waybill (PWB) number below.</p>
+            <form class="service-form">
+              <div class="form-group">
+                <label for="tracking-id">Parcel Tracking ID</label>
+                <input type="text" id="tracking-id" placeholder="Enter your 10-digit PWB number" pattern="[0-9]{10}" required>
+              </div>
+              <button type="submit" class="btn-primary">Track Now</button>
+            </form>
+          </div>
+
+          <div id="food-ordering" class="tab-content">
+            <h2>Order Food from Station Shops</h2>
+            <p>Have your favorite food ready for pickup when your train arrives.</p>
+            <form class="service-form">
+              <div class="form-group">
+                <label for="pnr-number">Enter PNR or Train Number</label>
+                <input type="text" id="pnr-number" placeholder="10-digit PNR or 5-digit Train No." required>
+              </div>
+              <div class="form-group">
+                <label for="pickup-station">Select Pickup Station</label>
+                <select id="pickup-station" required>
+                  <option value="">Select station</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-primary">Browse Restaurants</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image scroll-reveal">
+        <img src="https://media.gettyimages.com/id/2218046241/photo/katra-india-kashmir-bound-vande-bharat-train-at-shri-mata-vaishno-devi-shrine-station-on-june.jpg?s=612x612&w=0&k=20&c=7DhS8f4vpYLzVFIhjWlo6pc3zqJlhtRQlGUKuEsn9G4=" alt="Indian Railways Parcel Service">
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">About RailMate</h2>
+        <p class="section-subtitle scroll-reveal">Your trusted companion for all railway-related services, making travel and logistics seamless across India.</p>
+        
+        <div class="about-grid">
+          <div class="about-card scroll-reveal">
+            <span class="about-icon">🚆</span>
+            <h3>Railway Expertise</h3>
+            <p>With deep understanding of Indian Railways network, we provide reliable and efficient services tailored to your needs.</p>
+          </div>
+          <div class="about-card scroll-reveal">
+            <span class="about-icon">📱</span>
+            <h3>Digital First</h3>
+            <p>Modern technology meets traditional railway services. Book, track, and manage everything from your smartphone.</p>
+          </div>
+          <div class="about-card scroll-reveal">
+            <span class="about-icon">🎯</span>
+            <h3>Customer Focused</h3>
+            <p>Every feature is designed with our customers in mind, ensuring a smooth and hassle-free experience every time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section" style="background-color: var(--card-bg);">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">Key Features</h2>
+        <p class="section-subtitle scroll-reveal">Discover what makes RailMate the perfect railway companion for all your travel and shipping needs.</p>
+        
+        <div class="features-grid">
+          <div class="feature-card scroll-reveal">
+            <span class="feature-icon">⚡</span>
+            <h3>Real-Time Tracking</h3>
+            <p>Track your parcels and food orders in real-time with live updates and notifications.</p>
+            <ul class="feature-list">
+              <li>Live GPS tracking</li>
+              <li>SMS & email notifications</li>
+              <li>Delivery status updates</li>
+              <li>Historical tracking data</li>
+            </ul>
+          </div>
+          <div class="feature-card scroll-reveal">
+            <span class="feature-icon">💰</span>
+            <h3>Smart Pricing</h3>
+            <p>Get instant fare calculations and choose from multiple payment options for your convenience.</p>
+            <ul class="feature-list">
+              <li>Transparent pricing</li>
+              <li>Multiple payment gateways</li>
+              <li>Discount & offers</li>
+              <li>Invoice generation</li>
+            </ul>
+          </div>
+          <div class="feature-card scroll-reveal">
+            <span class="feature-icon">🛡</span>
+            <h3>Secure & Reliable</h3>
+            <p>Your data and transactions are protected with industry-standard security measures.</p>
+            <ul class="feature-list">
+              <li>SSL encryption</li>
+              <li>Secure payment processing</li>
+              <li>Data privacy protection</li>
+              <li>Insurance coverage</li>
+            </ul>
+          </div>
+          <div class="feature-card scroll-reveal">
+            <span class="feature-icon">📞</span>
+            <h3>24/7 Support</h3>
+            <p>Round-the-clock customer support to assist you with any queries or concerns.</p>
+            <ul class="feature-list">
+              <li>Live chat support</li>
+              <li>Phone assistance</li>
+              <li>Email support</li>
+              <li>FAQ database</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">Our Services</h2>
+        <p class="section-subtitle scroll-reveal">Comprehensive railway services designed to make your journey and logistics smooth and convenient.</p>
+        
+        <div class="services-grid">
+          <div class="service-item scroll-reveal">
+            <span class="service-icon">📦</span>
+            <h3>Parcel Booking</h3>
+            <p>Send packages safely across India with our reliable parcel booking service. From documents to electronics, we handle it all.</p>
+            <a href="#" class="service-btn">Book Now</a>
+          </div>
+          <div class="service-item scroll-reveal">
+            <span class="service-icon">📍</span>
+            <h3>Live Tracking</h3>
+            <p>Track your parcels in real-time with our advanced tracking system. Know exactly where your package is at any moment.</p>
+            <a href="#" class="service-btn">Track Parcel</a>
+          </div>
+          <div class="service-item scroll-reveal">
+            <span class="service-icon">🍔</span>
+            <h3>Food Pre-ordering</h3>
+            <p>Order your favorite meals from station restaurants and have them ready when your train arrives. No more waiting in queues.</p>
+            <a href="#" class="service-btn">Order Food</a>
+          </div>
+          <div class="service-item scroll-reveal">
+            <span class="service-icon">🎫</span>
+            <h3>Ticket Assistance</h3>
+            <p>Get help with ticket bookings, cancellations, and modifications. Our experts are here to assist you with all ticket-related queries.</p>
+            <a href="#" class="service-btn">Get Help</a>
+          </div>
+          <div class="service-item scroll-reveal">
+            <span class="service-icon">🚉</span>
+            <h3>Station Information</h3>
+            <p>Access detailed information about railway stations including facilities, timings, and nearby amenities for better travel planning.</p>
+            <a href="#" class="service-btn">Explore Stations</a>
+          </div>
+          <div class="service-item scroll-reveal">
+            <span class="service-icon">💼</span>
+            <h3>Business Solutions</h3>
+            <p>Specialized services for businesses including bulk parcel bookings, corporate accounts, and customized logistics solutions.</p>
+            <a href="#" class="service-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="section" style="background-color: var(--card-bg);">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">Support Center</h2>
+        <p class="section-subtitle scroll-reveal">Need help? We're here for you 24/7. Get in touch with our support team or find answers to common questions.</p>
+        
+        <div class="support-content">
+          <div class="support-info scroll-reveal">
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-color); font-size: 1.4rem;">Contact Information</h3>
+            
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div class="contact-details">
+                <h4>Customer Support</h4>
+                <p>1800-111-139 (Toll Free)</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <div class="contact-details">
+                <h4>Email Support</h4>
+                <p>support@railmate.in</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <span class="contact-icon">💬</span>
+              <div class="contact-details">
+                <h4>Live Chat</h4>
+                <p>Available 24/7 on our website</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <span class="contact-icon">🕒</span>
+              <div class="contact-details">
+                <h4>Business Hours</h4>
+                <p>24/7 Support Available</p>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--light-blue); border-radius: var(--border-radius-sm);">
+              <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Quick Help</h4>
+              <p style="color: var(--text-color); margin: 0; font-size: 0.95rem;">For urgent parcel tracking queries, SMS your PWB number to <strong>139</strong></p>
+            </div>
+          </div>
+          
+          <div class="support-form scroll-reveal">
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-color); font-size: 1.4rem;">Send us a Message</h3>
+            <form>
+              <div class="form-group">
+                <label for="support-name">Full Name</label>
+                <input type="text" id="support-name" placeholder="Enter your full name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="support-email">Email Address</label>
+                <input type="email" id="support-email" placeholder="Enter your email" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="support-phone">Phone Number</label>
+                <input type="tel" id="support-phone" placeholder="Enter your phone number">
+              </div>
+              
+              <div class="form-group">
+                <label for="support-subject">Subject</label>
+                <input type="text" id="support-subject" placeholder="Brief description of your query" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="support-message">Message</label>
+                <textarea id="support-message" placeholder="Describe your issue or query in detail..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <p>© <span id="current-year"></span> RailMate. All rights reserved. | A digital initiative for Indian Railways services</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Set minimum date for dispatch to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('parcel-date').setAttribute('min', today);
+
+    // Station data - In a real application, this would come from an API
+    const stationData = {
+      stations: [
+        { code: "NDLS", name: "New Delhi", state: "Delhi" },
+        { code: "BCT", name: "Mumbai Central", state: "Maharashtra" },
+        { code: "HWH", name: "Howrah Junction", state: "West Bengal" },
+        { code: "MAS", name: "Chennai Central", state: "Tamil Nadu" },
+        { code: "SBC", name: "Bangalore City", state: "Karnataka" },
+        { code: "CSMT", name: "Chhatrapati Shivaji Maharaj Terminus", state: "Maharashtra" },
+        { code: "LKO", name: "Lucknow", state: "Uttar Pradesh" },
+        { code: "CNB", name: "Kanpur Central", state: "Uttar Pradesh" },
+        { code: "JP", name: "Jaipur", state: "Rajasthan" },
+        { code: "ADI", name: "Ahmedabad", state: "Gujarat" },
+        { code: "PUNE", name: "Pune", state: "Maharashtra" },
+        { code: "SC", name: "Secunderabad", state: "Telangana" },
+        { code: "BBS", name: "Bhubaneswar", state: "Odisha" },
+        { code: "GHY", name: "Guwahati", state: "Assam" },
+        { code: "JAT", name: "Jammu Tawi", state: "Jammu & Kashmir" },
+        { code: "PNBE", name: "Patna", state: "Bihar" },
+        { code: "VSKP", name: "Visakhapatnam", state: "Andhra Pradesh" },
+        { code: "NGP", name: "Nagpur", state: "Maharashtra" },
+        { code: "BPL", name: "Bhopal", state: "Madhya Pradesh" },
+        { code: "INDB", name: "Indore", state: "Madhya Pradesh" },
+        { code: "CBE", name: "Coimbatore", state: "Tamil Nadu" },
+        { code: "TVC", name: "Thiruvananthapuram Central", state: "Kerala" },
+        { code: "ERS", name: "Ernakulam", state: "Kerala" },
+        { code: "ASR", name: "Amritsar", state: "Punjab" },
+        { code: "DDN", name: "Dehradun", state: "Uttarakhand" },
+        { code: "RNC", name: "Ranchi", state: "Jharkhand" },
+        { code: "HBJ", name: "Habibganj", state: "Madhya Pradesh" },
+        { code: "ANVT", name: "Anand Vihar Terminal", state: "Delhi" },
+        { code: "BSB", name: "Varanasi", state: "Uttar Pradesh" },
+        { code: "AGC", name: "Agra Cantt", state: "Uttar Pradesh" }
+      ]
+    };
+
+    // Initialize station dropdowns
+    function initializeStations() {
+      const fromSelect = document.getElementById('from-station');
+      const toSelect = document.getElementById('to-station');
+      const pickupSelect = document.getElementById('pickup-station');
+      
+      // Sort stations alphabetically by name
+      const sortedStations = [...stationData.stations].sort((a, b) => 
+        a.name.localeCompare(b.name)
+      );
+      
+      // Populate dropdowns
+      sortedStations.forEach(station => {
+        const optionText = `${station.name} (${station.code}) - ${station.state}`;
+        
+        // Add to from station
+        const fromOption = new Option(optionText, station.code);
+        fromSelect.add(fromOption);
+        
+        // Add to to station
+        const toOption = new Option(optionText, station.code);
+        toSelect.add(toOption);
+        
+        // Add to pickup station
+        const pickupOption = new Option(optionText, station.code);
+        pickupSelect.add(pickupOption);
+      });
+    }
+
+    // Call initialization on page load
+    document.addEventListener('DOMContentLoaded', initializeStations);
+
+    // Validate station selection
+    function validateStationSelection() {
+      const fromStation = document.getElementById('from-station');
+      const toStation = document.getElementById('to-station');
+      const alert = document.getElementById('parcel-alert');
+      const fromGroup = document.getElementById('from-station-group');
+      const toGroup = document.getElementById('to-station-group');
+      const submitBtn = document.getElementById('parcel-submit-btn');
+      
+      // Clear previous error states
+      fromGroup.classList.remove('error');
+      toGroup.classList.remove('error');
+      alert.classList.remove('show');
+      
+      // Check if both stations are selected
+      if (fromStation.value && toStation.value) {
+        // Check if stations are the same
+        if (fromStation.value === toStation.value) {
+          fromGroup.classList.add('error');
+          toGroup.classList.add('error');
+          alert.classList.add('show');
+          submitBtn.disabled = true;
+          return false;
+        } else {
+          submitBtn.disabled = false;
+          return true;
+        }
+      }
+      
+      return true;
+    }
+
+    // Add event listeners for station selection
+    document.getElementById('from-station').addEventListener('change', validateStationSelection);
+    document.getElementById('to-station').addEventListener('change', validateStationSelection);
+
+    // Tab functionality
+    function openService(evt, serviceName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        tabcontent[i].classList.remove('fade-in-up');
+      }
+      tablinks = document.getElementsByClassName("tab-link");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(serviceName).style.display = "block";
+      document.getElementById(serviceName).classList.add('fade-in-up');
+      evt.currentTarget.className += " active";
+    }
+
+    // Intersection Observer for scroll-reveal animation
+    const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    scrollRevealElements.forEach(el => observer.observe(el));
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerHeight = document.querySelector('header').offsetHeight;
+          const targetPosition = target.offsetTop - headerHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Enhanced form submission for parcel booking
+    document.getElementById('parcel-booking-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Validate station selection first
+      if (!validateStationSelection()) {
+        return;
+      }
+      
+      // Get form values
+      const fromStation = document.getElementById('from-station').value;
+      const toStation = document.getElementById('to-station').value;
+      const parcelType = document.getElementById('parcel-type').value;
+      const weight = document.getElementById('parcel-weight').value;
+      const date = document.getElementById('parcel-date').value;
+      
+      // Find station names
+      const fromStationName = stationData.stations.find(s => s.code === fromStation)?.name || fromStation;
+      const toStationName = stationData.stations.find(s => s.code === toStation)?.name || toStation;
+      
+      // Simulate fare calculation
+      const baseFare = 50;
+      const perKgRate = 15;
+      const calculatedFare = baseFare + (weight * perKgRate);
+      
+      // Show loading state
+      const submitBtn = document.getElementById('parcel-submit-btn');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Calculating...';
+      submitBtn.disabled = true;
+      
+      // Simulate API call
+      setTimeout(() => {
+        // Show success message with fare details
+        const fareMessage = `Booking confirmed!\n\nRoute: ${fromStationName} → ${toStationName}\nParcel Type: ${parcelType}\nWeight: ${weight} kg\nDispatch Date: ${new Date(date).toLocaleDateString('en-IN')}\nEstimated Fare: ₹${calculatedFare}\n\nYou will receive a confirmation SMS shortly.`;
+        
+        alert(fareMessage);
+        
+        // Reset form
+        this.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        
+        // Clear validation states
+        document.getElementById('from-station-group').classList.remove('error');
+        document.getElementById('to-station-group').classList.remove('error');
+        document.getElementById('parcel-alert').classList.remove('show');
+      }, 2000);
+    });
+
+    // Form submission handlers for other forms
+    document.querySelectorAll('form:not(#parcel-booking-form)').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form type based on parent or form content
+        const formType = this.closest('.tab-content') ? 
+          this.closest('.tab-content').id : 
+          'support-form';
+        
+        // Simple validation and feedback
+        const requiredFields = this.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+          if (!field.value.trim()) {
+            isValid = false;
+            field.style.borderColor = 'var(--warning-color)';
+          } else {
+            field.style.borderColor = 'var(--border-color)';
+          }
+        });
+        
+        if (isValid) {
+          // Simulate form submission
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalText = submitBtn.textContent;
+          
+          submitBtn.textContent = 'Processing...';
+          submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            let message = '';
+            
+            switch(formType) {
+              case 'parcel-tracking':
+                message = 'Tracking information found! Your parcel is currently in transit and will be delivered within 2-3 business days.';
+                break;
+              case 'food-ordering':
+                message = 'Great! We found 12 restaurants at your selected station. Redirecting to menu selection...';
+                break;
+              case 'support-form':
+                message = 'Message sent successfully! Our support team will respond within 24 hours.';
+                break;
+              default:
+                message = 'Request submitted successfully! We\'ll get back to you soon.';
+            }
+            
+            alert(message);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            this.reset();
+          }, 2000);
+        } else {
+          alert('Please fill in all required fields.');
+        }
+      });
+    });
+
+    // Add some interactive elements
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add loading animation to buttons on click
+      document.querySelectorAll('.btn-primary:not(#parcel-submit-btn), .service-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (!this.disabled && this.type !== 'submit') {
+            e.preventDefault();
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              this.style.transform = '';
+            }, 150);
+          }
+        });
+      });
+    });
+
+    // Simulate API call for dynamic station loading (optional enhancement)
+    function loadStationsFromAPI() {
+      // This would typically fetch from a real API
+      // For now, we're using the local data
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(stationData.stations);
+        }, 100);
+      });
+    }
+
+    // Optional: Add search functionality to dropdowns (for better UX with many stations)
+    function makeSelectSearchable(selectElement) {
+      // This is a placeholder for implementing searchable select
+      // In production, you might use a library like Select2 or Choices.js
+      console.log('Searchable select initialized for:', selectElement.id);
+    }
+  </script>
+</body>
+</html>
