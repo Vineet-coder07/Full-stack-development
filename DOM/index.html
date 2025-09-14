@@ -1,17 +1,50 @@
 <html>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        function popluateDiv(){
+        let timeout;
+
+        function debouncedPopulatedDiv() {
+            
+            clearTimeout(timeout);
+            
+            timeout = setTimeout(() => {
+                popluateDiv();
+            }, 1000);
+        }
+      /* function popluateDiv(){
             // document
             const a=document.getElementById("firstnumber").value;
             const b=document.getElementById("secondnumber").value;
-            const ans=document.getElementById("finalsum");
-            ans.innerHTML=parseInt(a)+parseInt(b);
-        }
+           // const ans=document.getElementById("finalsum");
+           const res = fetch("http://localhost:3000/sum?a=" + a + "&b=" + b)
+           .then(function(response){
+            console.log(response);
+            response.text()
+            .then(function(ans){
+                document.getElementById("finalsum").innerHTML=ans;
+            })
+           })
+        }*/
+      /* async function popluateDiv(){
+         const a=document.getElementById("firstnumber").value;
+        const b=document.getElementById("secondnumber").value;
+        const response = await fetch("http://localhost:3000/sum?a=" + a + "&b=" + b)
+        const ans=await response.text();
+        document.getElementById("finalsum").innerHTML=ans;
+       }*/
+      async function popluateDiv(){
+        const a=document.getElementById("firstnumber").value;
+        const b=document.getElementById("secondnumber").value;
+        const response=await axios.get("http://localhost:3000/sum?a=" + a + "&b="  + b + "&t=" + new Date().getTime());
+        const ans =  response.data;
+        document.getElementById("finalsum").innerHTML=ans;
+        console.log(response.data);
+    }
     </script>
     <body>
-        <input type="text" id ="firstnumber" placeholder="First number"></input> <br> <br>
-        <input type="text" id="secondnumber" placeholder="Second number"></input> <br> <br>
-        <button  onclick="popluateDiv()">Calculate sum</button> <br> <br>
+        <input oninput="popluateDiv()"   type="text" id ="firstnumber" placeholder="First number"></input> <br> <br>
+        <input oninput="popluateDiv()"   type="text" id="secondnumber" placeholder="Second number"></input> <br> <br>
+        <!--<button  onclick="popluateDiv()">Calculate sum</button> <br> <br> -->
         <div id="finalsum"></div>
     </body>
 </html>
